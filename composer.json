@@ -1,0 +1,32 @@
+{
+    "name": "smeghead/php-vendor-credits",
+    "description": "php-vendor-creadits creates CREDITS file from LICENSE files of dependencies",
+    "type": "library",
+    "require-dev": {
+        "phpunit/phpunit": "^9.6",
+        "phpstan/phpstan": "^1.10"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Smeghead\\PhpVendorCredits\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "smeghead"
+        }
+    ],
+    "require": {},
+    "scripts": {
+        "test": [
+            "php vendor/bin/phpunit --colors test/"
+        ],
+        "phpstan": [
+            "vendor/bin/phpstan analyse"
+        ]
+    },
+    "bin": [
+        "bin/php-vendor-credits"
+    ]
+}
