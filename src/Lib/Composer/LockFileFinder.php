@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Smeghead\PhpVendorCredits\Domain\Composer;
+namespace Smeghead\PhpVendorCredits\Lib\Composer;
 
 final class LockFileFinder
 {
@@ -21,6 +21,10 @@ final class LockFileFinder
         if (!file_exists($this->rootDirectory)) {
             throw new \Exception('rootDirectory is not exists. ' . $this->rootDirectory);
         }
-        return 'fake';
+        $lockFillePath = sprintf('%s/composer.lock', $this->rootDirectory);
+        if (!file_exists($lockFillePath)) {
+            throw new \Exception('composer.lock not found. ' . $lockFillePath);
+        }
+        return $lockFillePath;
     }
 }
