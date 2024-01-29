@@ -17,7 +17,9 @@
             "name": "smeghead"
         }
     ],
-    "require": {},
+    "require": {
+        "symfony/console": "^5.4"
+    },
     "scripts": {
         "test": [
             "php vendor/bin/phpunit --colors test/"

@@ -34,4 +34,11 @@ class LicenseFinderTest extends TestCase
 
         $this->assertSame('LICENSE.md', $sut->getLicenseFilename());
     }
+
+    public function testCopyright(): void
+    {
+        $sut = new LicenseFinder(['README.md', 'COPYRIGHT']);
+
+        $this->assertSame('COPYRIGHT', $sut->getLicenseFilename());
+    }
 }
