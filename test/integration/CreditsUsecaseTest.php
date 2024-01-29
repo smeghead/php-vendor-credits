@@ -15,7 +15,7 @@ class CreditsUsecaseTest extends TestCase
 
         $this->assertSame('psr/container', $licenses[0]->getName());
         $this->assertSame('https://github.com/php-fig/container', $licenses[0]->getUrl());
-        $this->assertSame('/usr/src/vendor/psr/container/LICENSE', $licenses[0]->getPath());
+        $this->assertMatchesRegularExpression('@/vendor/psr/container/LICENSE$@', $licenses[0]->getPath());
         $this->assertMatchesRegularExpression('/Copyright \(c\) 2013-2016 container-interop/', $licenses[0]->getContent());
         $this->assertMatchesRegularExpression('/Copyright \(c\) 2016 PHP Framework Interoperability Group/', $licenses[0]->getContent());
     }
