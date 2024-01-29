@@ -24,7 +24,7 @@ final class LockFile
         $packages = [];
         foreach ($this->object->{'packages'} as $p) {
             $name = $p->name;
-            $url = $p->homepage;
+            $url = property_exists($p, 'homepage') ? $p->homepage : '';
             $packages[] = new Package($name, $url);
         }
         return $packages;
