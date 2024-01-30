@@ -13,7 +13,7 @@ foreach ([__DIR__ . '/../../../autoload.php', __DIR__ . '/../vendor/autoload.php
 use Smeghead\PhpVendorCredits\Command\CreditsCommand;
 use Symfony\Component\Console\Application;
 
-$app = new Application('php-vendor-credits', '0.0.1');
+$app = new Application('php-vendor-credits', '0.0.3');
 $app->add(new CreditsCommand('credits'));
 $app->setDefaultCommand('credits', true);
 $app->run();
