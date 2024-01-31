@@ -11,7 +11,7 @@ php-vendor-creadits was created as a PHP Composer version of gocredits (https://
 ### From Composer
 
 ```bash
-composer require --dev smeghead/php-vendor-credits
+$ composer require --dev smeghead/php-vendor-credits
 ```
 
 ## Usage
@@ -23,6 +23,6 @@ $ vendor/bin/php-vendor-credits . > CREDITS
 ## Development
 
 ```bash
-docker compose build
-docker compose run --rm php_cli bash
+$ docker compose build
+$ docker compose run --rm php_cli bash
 ```
