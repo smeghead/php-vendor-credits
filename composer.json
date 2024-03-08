@@ -18,8 +18,7 @@
         }
     ],
     "require": {
-        "php" : ">=7.4",
-        "symfony/console": "^5.4|^6.4"
+        "php" : ">=7.4"
     },
     "scripts": {
         "test": [
