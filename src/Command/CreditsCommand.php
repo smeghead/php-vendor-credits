@@ -6,26 +6,48 @@ namespace Smeghead\PhpVendorCredits\Command;
 
 use Smeghead\PhpVendorCredits\Lib\Usecase\CreditsUsecase;
 use Smeghead\PhpVendorCredits\Lib\Usecase\License;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 
-final class CreditsCommand extends Command
+final class CreditsCommand
 {
-    protected static $defaultName = 'credits';
+    private string $version;
 
-    protected function configure(): void
+    public function __construct(string $version)
     {
-        $this
-            ->setDescription('php-vendor-creadits creates CREDITS file from LICENSE files of dependencies')
-            ->addArgument('project directory', InputArgument::REQUIRED, 'Specify the directory where `composer.lock` exists.');
+        $this->version = $version;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): int
+    /**
+     * @param array<string, string|bool> $options
+     * @param array<string> $args
+     */
+    public function run(array $options, array $args): void
     {
+        $usage =<<<EOU
+usage: php-vendor-credits [OPTIONS] <project directory>
+
+php-vendor-creadits creates CREDITS file from LICENSE files of dependencies
+
+OPTIONS
+  -h, --help                     show this help page.
+  -v,-V, --version               show version.
+
+EOU;
+
+        if (isset($options['v']) || isset($options['V']) || isset($options['version'])) {
+            fputs(STDERR, sprintf('php-vendor-creates %s%s', $this->version, PHP_EOL));
+            exit(-1);
+        }
+        if (isset($options['h']) || isset($options['help'])) {
+            fputs(STDERR, $usage);
+            exit(-1);
+        }
+
         /** @var string|null */
-        $rootDirectory = $input->getArgument('project directory');
+        $rootDirectory = array_shift($args);
+        if (empty($rootDirectory)) {
+            fputs(STDERR, "ERROR: required project directory.\n");
+            exit(-1);
+        }
         $usecase = new CreditsUsecase(strval($rootDirectory));
         $licenses = $usecase->execute();
 
@@ -37,7 +59,7 @@ final class CreditsCommand extends Command
 ================================================================
 
 EOC;
-        $output->write(implode("\n", array_map(
+        print(implode("\n", array_map(
             fn(License $l) => sprintf(
                 $format,
                 $l->getName(),
@@ -45,7 +67,7 @@ EOC;
                 $l->getContent()
             ), $licenses)));
 
-        return Command::SUCCESS;
+        return;
     }
 
 }

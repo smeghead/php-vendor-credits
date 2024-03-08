@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v0.0.5 (2024-03-08)
+
+### Features
+
+ * remove Symfony/console dependency
+
 ### Bug fix
 
  * Fixed message when missing required argument.

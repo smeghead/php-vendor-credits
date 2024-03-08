@@ -11,9 +11,8 @@ foreach ([__DIR__ . '/../../../autoload.php', __DIR__ . '/../vendor/autoload.php
 }
 
 use Smeghead\PhpVendorCredits\Command\CreditsCommand;
-use Symfony\Component\Console\Application;
 
-$app = new Application('php-vendor-credits', '0.0.4');
-$app->add(new CreditsCommand('php-vendor-credits'));
-$app->setDefaultCommand('php-vendor-credits', true);
-$app->run();
+$options = getopt('hvV', ['help', 'version'], $restIndex);
+
+$command = new CreditsCommand('0.0.5');
+$command->run($options, array_slice($argv, $restIndex));
